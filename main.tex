@@ -1,9 +1,7 @@
-% !TEX encoding = UTF-8 Unicode
-% !TeX root = man-thesisby.tex
+% !TeX encoding = UTF-8 Unicode
+% !TeX root = main.tex
 % !TeX TS-program = pdflatex
 %% (При смене движка необходимо удалить вспомогательные файлы *.aux *.brf *.log *.out *.synctex.gz *.toc)
-
-\RequirePackage[l2tabu,orthodox]{nag} 
 
 \documentclass{thesisby}
 \usepackage{etoolbox,ifxetex,ifluatex}
@@ -11,72 +9,59 @@
 
 %%% Проверка используемого TeX-движка %%%
 \ifboolexpr{bool{xetex} or bool{luatex}}{%
-	\usepackage{fontspec}
-	\PassOptionsToPackage{no-math}{fontspec}    % https://tex.stackexchange.com/a/26295/104425
-	\usepackage{polyglossia}%[2014/05/21]        % Поддержка многоязычности
+  \usepackage{fontspec}
+  \PassOptionsToPackage{no-math}{fontspec}     % https://tex.stackexchange.com/a/26295/104425
+  \usepackage{polyglossia}%[2014/05/21]        % Поддержка многоязычности
 
-	% fonts and languages
-	%	\setmainfont{CMU Serif}	
-	%\usepackage[default]{droidserif}
-	%\usepackage[defaultsans]{droidsans}
-	
-	\defaultfontfeatures{Ligatures=TeX,Mapping=tex-text}
-	
-	\setmainlanguage[babelshorthands = true]{russian}
-	\setotherlanguage{english}
-		
-	\setmainfont{Times New Roman}
-	\setmonofont{Courier New}
-	\setsansfont{Arial}
-	
-	\newfontfamily\cyrillicfont[Script=Cyrillic]{Times New Roman}
-	\newfontfamily\cyrillicfontsf[Script=Cyrillic]{Arial}
-	\newfontfamily\cyrillicfonttt[Script=Cyrillic]{Courier New}
-	
-	\newfontfamily\englishfont{Times New Roman}
-	\newfontfamily\englishfontsf{Arial}
-	\newfontfamily\englishfonttt{Courier New}
-	
-	\renewcommand{\UrlFont}{\small\rmfamily\tt}
+  % fonts and languages
+  \defaultfontfeatures{Ligatures=TeX,Mapping=tex-text}
+
+  \setmainlanguage[babelshorthands = true]{russian}
+  \setotherlanguage{english}
+
+  \setmainfont{Times New Roman}
+  \setmonofont{Courier New}
+  \setsansfont{Arial}
+
+  \newfontfamily\cyrillicfont[Script=Cyrillic]{Times New Roman}
+  \newfontfamily\cyrillicfontsf[Script=Cyrillic]{Arial}
+  \newfontfamily\cyrillicfonttt[Script=Cyrillic]{Courier New}
+
+  \newfontfamily\englishfont{Times New Roman}
+  \newfontfamily\englishfontsf{Arial}
+  \newfontfamily\englishfonttt{Courier New}
+
+  \renewcommand{\UrlFont}{\small\rmfamily\tt}
 }{%
-	\usepackage[T1,T2A]{fontenc}
-	\usepackage[utf8]{inputenc}
-	\usepackage[english, russian]{babel}
-	\IfFileExists{pscyr.sty}{\usepackage{pscyr}}{}  % Подключение pscyr
+  \usepackage[T1,T2A]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage[english, russian]{babel}
+  \IfFileExists{pscyr.sty}{\usepackage{pscyr}}{}  % Подключение pscyr
 }
 
-
-% Управление колонтитулами
-% \headsep = 3mm
-% \fancyhead{}
-% \fancyfoot[C]{\thepage}
-
-%для борьбы с переполнениями за счет разреженных слов в абзаце
+% Для борьбы с переполнениями за счет разреженных слов в абзаце
 \emergencystretch=25pt
 
-\usepackage{amsmath, amssymb, amsfonts} 
+\usepackage{amsmath, amssymb, amsfonts}
 \usepackage{longtable, array}
 \usepackage{graphicx, epsfig}
 
-\usepackage{algorithm}			% Для вставки псевдокода
-\usepackage{algpseudocode}		% Для вставки псевдокода
+\usepackage{algorithm}        % Для вставки псевдокода
+\usepackage{algpseudocode}    % Для вставки псевдокода
 
 % Русская традиция начертания греческих букв
-\usepackage{upgreek} % прямые греческие ради русской традиции (в формулах записывается \alpha как \upalpha и т.д.)
-
-%\usepackage{refcheck}% checks lost and useless labels, shows `keys' of \label in the margins
+\usepackage{upgreek} % Прямые греческие ради русской традиции (в формулах записывается \alpha как \upalpha и т.д.)
 
 \usepackage{siunitx}% For Celsium sign only
 
-% \graphicspath{{fig/}}
 \begin{document}
 
 \hypersetup{
-pdftitle = {Руководство по оформлению диссертации с использованием \TeX овского стиля {\itshape thesisby}},
-pdfauthor = {Петров Вадим Александрович},
+pdftitle = { НЕЙРО-СЕМАНТИЧЕСКОЕ УПРАВЛЕНИЕ ДЛЯ ЗАДАЧ АСУТП},
+pdfauthor = {Иванюк Дмитрий Сергеевич},
 pdfsubject = {Диссертация},
 pdfkeywords = {ТеХ, диссертация}
-}% End of hypersetup
+}
 
 \include{titlepage}
 \tableofcontents
