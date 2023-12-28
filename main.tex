@@ -42,6 +42,26 @@
 % Для борьбы с переполнениями за счет разреженных слов в абзаце
 \emergencystretch=25pt
 
+\usepackage{enumitem}
+
+% Счётчики.
+\usepackage[figure,table]{totalcount}   % Счётчик рисунков и таблиц.
+\usepackage{totcount}                   % Пакет создания счётчиков на основе последнего номера подсчитываемого элемента (может требовать дважды компилировать документ).
+\usepackage{totpages}
+
+\usepackage{microtype}
+
+%for lists
+\usepackage[ampersand]{easylist}
+\ListProperties(Hide=100, Hang=false, Margin=0mm, Indent1=10.5mm, Indent2=15mm, Style*=-- ,
+Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )
+
+\newenvironment{easylistNum}{
+    \begin{easylist}
+        \ListProperties(Hide1=0, Hang=false, Margin=0mm, Indent1=10.5mm, Indent2=15mm, Start1=1, Style*=, FinalMark={)})}
+        {\ListProperties(Hide=100, Hang=false, Margin=0mm, Indent1=10.5mm, Indent2=15mm, Style*=-- , Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )
+    \end{easylist}}
+
 \usepackage{amsmath, amssymb, amsfonts}
 \usepackage{longtable, array}
 \usepackage{graphicx, epsfig}
@@ -64,16 +84,14 @@ pdfkeywords = {ТеХ, диссертация}
 }
 
 \include{titlepage}
+
 \tableofcontents
 
 \include{reduction}
 
 \include{introduction}
+\include{description_of_work}
 
-\include{text}
 \include{bib}
-
-\appendix
-\include{appendix}
 
 \end{document}

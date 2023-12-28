@@ -1,6 +1,14 @@
-\chapter*{БИБЛИОГРАФИЧЕСКИЙ СПИСОК}
-\addcontentsline{toc}{chapter}{БИБЛИОГРАФИЧЕСКИЙ СПИСОК}
+\chapter*{Список использованных источников}
+\addcontentsline{toc}{chapter}{Список использованных источников}
 
 % For BibTeX
 \bibliographystyle{gost71u2003}
 \bibliography{bibtexbase}
+
+% Список публикаций соискателя
+\begin{mybibliography}{00}
+    \def\selectlanguageifdefined#1{
+        \expandafter\ifx\csname date#1\endcsname\relax
+        \else\language\csname l@#1\endcsname\fi}
+
+\end{mybibliography}

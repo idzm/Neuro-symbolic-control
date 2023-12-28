@@ -129,10 +129,8 @@ LaTeX document class for thesis]
 \renewcommand\contentsname{{\cyr\CYRO\CYRG\CYRL\CYRA\CYRV\CYRL\CYRE\CYRN\CYRI\CYRE}}%
 \renewcommand\listfigurename{{\cyr\CYRS\cyrp\cyri\cyrs\cyro\cyrk{} \cyrr\cyri\cyrs\cyru\cyrn\cyrk\cyro\cyrv}}%
 \renewcommand\listtablename{{\cyr\CYRS\cyrp\cyri\cyrs\cyro\cyrk{} \cyrt\cyra\cyrb\cyrl\cyri\cyrc}}%
-\renewcommand\bibname{{\cyr\CYRB\cyri\cyrb\cyrl\cyri\cyro\cyrg\cyrr\cyra\cyrf\cyri\cyrch\cyre\cyrs\cyrk\cyri\cyrishrt{} \cyrs\cyrp\cyri\cyrs\cyro\cyrk}}%
-\renewcommand\mybibname{{\cyr\CYRS\cyrp\cyri\cyrs\cyro\cyrk{}  \cyrp\cyru\cyrb\cyrl\cyri\cyrk\cyra\cyrc\cyri\cyrishrt{} \cyrs\cyro\cyri\cyrs\cyrk\cyra\cyrt\cyre\cyrl\cyrya{}
-    \cyru\cyrch\cyre\cyrn\cyro\cyrishrt{}
-    \cyrs\cyrt\cyre\cyrp\cyre\cyrn\cyri}}%
+\renewcommand\bibname{Библиографический список}
+\renewcommand\mybibname{Список публикаций соискателя учёной степени}
 \renewcommand\indexname{{\cyr\CYRP\CYRR\CYRE\CYRD\CYRM\CYRE\CYRT\CYRN\CYRERY\CYRISHRT{} \CYRU\CYRK\CYRA\CYRZ\CYRA\CYRT\CYRE\CYRL\CYRSFTSN}}%
 \renewcommand\figurename{{\cyr\CYRR\cyri\cyrs\cyru\cyrn\cyro\cyrk}}%
 \renewcommand\tablename{{\cyr\CYRT\cyra\cyrb\cyrl\cyri\cyrc\cyra}}%

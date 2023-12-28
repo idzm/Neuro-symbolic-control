@@ -1,0 +1,54 @@
+\newcommand{\actuality}{\textbf{Связь работы с научными программами (проектами), темами}}
+\newcommand{\aim}{\textbf{Цель, задачи, объект и предмет исследования}}
+\newcommand{\novelty}{\textbf{Научная новизна}}
+\newcommand{\defpositions}{\textbf{Положения, выносимые на защиту}}
+\newcommand{\influence}{\textbf{Научная и практическая значимость}}
+\newcommand{\reliability}{\textbf{Степень достоверности}}
+\newcommand{\contribution}{\textbf{Личный вклад соискателя ученой степени в результаты диссертации}}
+\newcommand{\probation}{\textbf{Апробация диссертации и информация об использовании ее результатов}}
+\newcommand{\publications}{\textbf{Опубликованность результатов диссертации}}
+
+%%http://www.linux.org.ru/forum/general/6993203#comment-6994589 (используется totcount).
+\makeatletter
+\def\formbytotal#1#2#3#4#5{%
+    \newcount\@c
+    \@c\totvalue{#1}\relax
+    \newcount\@last
+    \newcount\@pnul
+    \@last\@c\relax
+    \divide\@last 10
+    \@pnul\@last\relax
+    \divide\@pnul 10
+    \multiply\@pnul-10
+    \advance\@pnul\@last
+    \multiply\@last-10
+    \advance\@last\@c
+    \total{#1}~#2%
+    \ifnum\@pnul=1#5\else%
+    \ifcase\@last#5\or#3\or#4\or#4\or#4\else#5\fi
+    \fi
+}
+\makeatother
+
+\input{characteristic} % Характеристика работы по структуре во введении и в автореферате не отличается (ГОСТ Р 7.0.11, пункты 5.3.1 и 9.2.1), потому её загружаем из одного и того же внешнего файла, предварительно задав форму выделения некоторым параметрам.
+
+% Регистрируем счётчики в системе totcounter.
+\regtotcounter{totalcount@figure}
+\regtotcounter{totalcount@table}       % Если поставить в преамбуле то ошибка в числе таблиц
+\regtotcounter{TotPages}               % Если поставить в преамбуле то ошибка в числе страниц
+
+\newtotcounter{citenum}
+\def\oldcite{}
+\let\oldcite=\bibcite
+\def\bibcite{\stepcounter{citenum}\oldcite}
+
+\vspace{3mm}
+\textbf{Структура и объем диссертации}
+\vspace{3mm}
+
+Диссертация состоит из введения, общей характеристики работы, четырех глав с краткими выводами по каждой главе, заключения, библиографического списка, списка публикаций автора и приложений.
+
+В \textbf{\textit{первой главе}} рассмотрено краткое описание современных систем управления, дана классификация их типов. Определено понятие нейроуправления. Рассмотрена классификация нейросетевых приёмов управления. \textbf{\textit{Вторая глава}} посвящена рассмотрению нейросетевым моделям управления технологическими процессами. В \textbf{\textit{третьей главе}} приведены результаты разработки нейросетевой модели управления процессом пастеризации.
+
+\textcolor{red}{
+    Общий объём диссертации составляет \formbytotal{TotPages}{страниц}{у}{ы}{}, из которых XX страниц основного текста, \formbytotal{totalcount@figure}{рисунк}{ом}{ами}{ами}, \formbytotal{totalcount@table}{таблиц}{ей}{ами}{ами}, библиография из \formbytotal{citenum}{источник}{}{а}{ов}, включая XX публикаций автора, приложения на XX страницах.}
