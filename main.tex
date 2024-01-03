@@ -5,7 +5,7 @@
 
 \documentclass{thesisby}
 \usepackage{etoolbox,ifxetex,ifluatex}
-\usepackage[unicode,pagebackref,hypertexnames=false]{hyperref}
+\usepackage[unicode,hypertexnames=false]{hyperref}
 
 %%% Проверка используемого TeX-движка %%%
 \ifboolexpr{bool{xetex} or bool{luatex}}{%
@@ -43,6 +43,24 @@
 \emergencystretch=25pt
 
 \usepackage{enumitem}
+
+\usepackage[style=numeric-comp,
+    defernumbers=true
+]{biblatex} % To load multiple bib files.
+
+% Общий список.
+\addbibresource{bibtexbase.bib}
+
+% Список публикаций соискателя.
+\addbibresource{bibtex_my.bib}
+\DeclareSourcemap{
+    \maps[datatype=bibtex, overwrite]{
+        \map{
+            \perdatasource{bibtex_my.bib}
+            \step[fieldset=KEYWORDS, fieldvalue=idzm, append]
+        }
+    }
+}
 
 % Счётчики.
 \usepackage[figure,table]{totalcount}   % Счётчик рисунков и таблиц.

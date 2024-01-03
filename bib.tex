@@ -1,14 +1,10 @@
-\chapter*{Список использованных источников}
-\addcontentsline{toc}{chapter}{Список использованных источников}
+\chapter*{Библиографический список}
+\addcontentsline{toc}{chapter}{Библиографический список}
 
-% For BibTeX
-\bibliographystyle{gost71u2003}
-\bibliography{bibtexbase}
+\printbibliography[heading=subbibintoc, notkeyword={idzm}, title={Список использованных источников}]
 
-% Список публикаций соискателя
-\begin{mybibliography}{00}
-    \def\selectlanguageifdefined#1{
-        \expandafter\ifx\csname date#1\endcsname\relax
-        \else\language\csname l@#1\endcsname\fi}
+\nocite{*}
 
-\end{mybibliography}
+\DeclareFieldFormat{labelnumberwidth}{#1\adddot\midsentence}
+\newrefcontext[labelprefix={A-}, sorting=ynt]
+\printbibliography[heading=subbibintoc, keyword={idzm}, title={Список публикаций соискателя}]
