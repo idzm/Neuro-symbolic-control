@@ -44,9 +44,19 @@
 
 \usepackage{enumitem}
 
-\usepackage[style=numeric-comp,
-    defernumbers=true
+\usepackage[
+    defernumbers = true,  %Раздельная нумерация.
+    style = gost-numeric,
+    maxnames = 10,
+    movenames = false
 ]{biblatex} % To load multiple bib files.
+
+% Библиографический список в соответствии с ГОСТ.
+\makeatletter
+\ltx@iffilelater{biblatex-gost.def}{2017/02/01}%
+{\toggletrue{bbx:gostbibliography}%
+    \renewcommand*{\revsdnamepunct}{\addcomma}}{}
+\makeatother
 
 % Общий список.
 \addbibresource{bibtexbase.bib}
