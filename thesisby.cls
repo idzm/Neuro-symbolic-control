@@ -117,7 +117,7 @@ LaTeX document class for thesis]
 \newcommand\indexname{{\cyr\CYRP\CYRR\CYRE\CYRD\CYRM\CYRE\CYRT\CYRN\CYRERY\CYRISHRT{} \CYRU\CYRK\CYRA\CYRZ\CYRA\CYRT\CYRE\CYRL\CYRSFTSN}}%
 \newcommand\figurename{{\cyr\CYRR\cyri\cyrs\cyru\cyrn\cyro\cyrk}}%
 \newcommand\tablename{{\cyr\CYRT\cyra\cyrb\cyrl\cyri\cyrc\cyra}}%
-\newcommand\chaptername{{\cyr\CYRG\CYRL\CYRA\CYRV\CYRA}}%
+\newcommand\chaptername{Глава}%
 \newcommand\eqremname{{\cyr\cyrg\cyrd\cyre}}%
 \newcommand\appendixname{{\cyr\CYRP\CYRR\CYRI\CYRL\CYRO\CYRZH\CYRE\CYRN\CYRI\CYRE}}%
 \newcommand\commentname{{\cyr\CYRP\cyrr\cyri\cyrm\cyre\cyrch\cyra\cyrn\cyri\cyre}}%
@@ -134,7 +134,7 @@ LaTeX document class for thesis]
 \renewcommand\indexname{{\cyr\CYRP\CYRR\CYRE\CYRD\CYRM\CYRE\CYRT\CYRN\CYRERY\CYRISHRT{} \CYRU\CYRK\CYRA\CYRZ\CYRA\CYRT\CYRE\CYRL\CYRSFTSN}}%
 \renewcommand\figurename{{\cyr\CYRR\cyri\cyrs\cyru\cyrn\cyro\cyrk}}%
 \renewcommand\tablename{{\cyr\CYRT\cyra\cyrb\cyrl\cyri\cyrc\cyra}}%
-\renewcommand\chaptername{{\cyr\CYRG\CYRL\CYRA\CYRV\CYRA}}%
+\renewcommand\chaptername{Глава}%
 \renewcommand\eqremname{{\cyr\cyrg\cyrd\cyre}}%
 \renewcommand\appendixname{{\cyr\CYRP\CYRR\CYRI\CYRL\CYRO\CYRZH\CYRE\CYRN\CYRI\CYRE}}%
 \renewcommand\commentname{{\cyr\CYRP\cyrr\cyri\cyrm\cyre\cyrch\cyra\cyrn\cyri\cyre}}%
