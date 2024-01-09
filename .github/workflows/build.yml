@@ -1,0 +1,28 @@
+name: Create PDF
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install texlive
+        run: |
+          sudo sudo apt update
+          sudo apt-get install -y cm-super      # Fonts.
+          sudo apt -y install make texlive latexmk texlive-lang-cyrillic texlive-science texlive-latex-extra ttf-mscorefonts-installer texlive-bibtex-extra biber
+          sudo fc-cache -fv
+
+      - name: Build PDF
+        run: |
+          latexmk -pdf -outdir=out ./main.tex
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: main.pdf
+          path: out/main.pdf
+    
