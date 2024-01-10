@@ -79,11 +79,12 @@
 % Счётчики.
 \usepackage[figure,table]{totalcount}   % Счётчик рисунков и таблиц.
 \usepackage{totcount}                   % Пакет создания счётчиков на основе последнего номера подсчитываемого элемента (может требовать дважды компилировать документ).
+\AtEveryBibitem{\stepcounter{citenum}\stepcounter{citenum_my}}
+
 \usepackage{totpages}
+\usepackage[abspage, user, lastpage]{zref}
 
 \usepackage{microtype}
-
-\usepackage{svg}
 
 %for lists
 \usepackage[ampersand]{easylist}
@@ -106,9 +107,27 @@ Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )
 % Русская традиция начертания греческих букв
 \usepackage{upgreek} % Прямые греческие ради русской традиции (в формулах записывается \alpha как \upalpha и т.д.)
 
-\usepackage{siunitx}% For Celsium sign only
+\usepackage{siunitx} % For Celsium sign only
 
 \begin{document}
+
+% Регистрируем счётчики в системе "totcount".
+\regtotcounter{totalcount@table}
+\regtotcounter{totalcount@figure}
+\regtotcounter{TotPages}
+\regtotcounter{textpages}
+
+% Вычисление страниц только с текстом.
+\makeatletter
+\def\textpages{\number\numexpr\zref@extract{lastpagetocount}{abspage}-\zref@extract{firstpagetocount}{abspage}+1\relax}
+\makeatother
+
+\newtotcounter{textpages}
+\setcounter{textpages}{\textpages}
+
+% Вычисление количества источников.
+\newtotcounter{citenum}
+\newtotcounter{citenum_my}
 
 \hypersetup{
     pdftitle = {НЕЙРО-СЕМАНТИЧЕСКОЕ УПРАВЛЕНИЕ ДЛЯ ЗАДАЧ АСУТП},
@@ -123,10 +142,14 @@ Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )
 
 \include{reduction}
 
+\zlabel{firstpagetocount}
+
 \include{introduction}
 \include{description_of_work}
 
 \include{chapter1}
+
+\zlabel{lastpagetocount}
 
 \include{bib}
 
