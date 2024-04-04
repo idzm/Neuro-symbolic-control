@@ -10,8 +10,42 @@
 Долгое время была популярна идея построения совершенной системы управления – универсального контроллера, который извне выглядел бы как «черный ящик». Он мог бы использоваться для управления любыми системами, имея связи с датчиками, исполнительными механизмами, другими контроллерами и специальную связь с «модулем эффективности» – системой, которая определяет эффективность управления исходя из заданных критериев. Пользователь такой системы управления задавал бы только желаемый результат, далее обученный контроллер управлял бы самостоятельно, возможно придерживаясь сложной стратегии достижения в будущем желаемого результата. Также он бы все время корректировал свое управление исходя из реакции объекта управления для достижения максимальной эффективности. Общая схема такой системы приведена ниже.
 
 \begin{figure}[H]
+    \tikzset{ box/.style={
+                % The shape:
+                rectangle,
+                % The size:
+                minimum size=20mm,
+                % The border:
+                very thick,
+                draw=red!50!black!50,         % 50% red and 50% black,
+                % and that mixed with 50% white
+                % The filling:
+                top color=white,              % a shading that is white at the top...
+                bottom color=red!50!black!20, % and something else at the bottom
+                % Font
+                font=\itshape,
+                align=center
+            }
+    }
+
     \centering
-    \includegraphics[width=\textwidth]{images/intro/Система с подкрепляющим обучением.png}
+    \usetikzlibrary {positioning,shapes.misc,calc}
+    \begin{tikzpicture}[
+            right1/.style={to path={-- ++(5,0) |- (\tikztotarget)}},
+            left1/.style={to path={-- ++(-5,0) |- (\tikztotarget)}}]
+        \node (o1)   [box]                        {Объект\\управления};
+        \node (u1)   [below=of o1,align=center]   {$U(t)$\\Эффективность};
+        \node (s1)   [box,below=of u1]            {Управляющее\\устройство\\(контроллер)};
+
+        \node (control)   [right=of s1,align=center]    {$u(t)$\\Управление};
+        \node (sensors)   [left=of s1,align=center]     {$X(t)$\\Показания датчиков};
+
+        \path (o1)   edge                 (u1)
+        (u1)   edge[very thick, ->] (s1)
+        ($ (s1.east) $) edge[very thick, ->, right1] ($ (o1.east) $)
+        ($ (o1.west) $) edge[very thick, ->, left1] ($ (s1.west) $);
+    \end{tikzpicture}
+
     \caption{Система с подкрепляющим обучением}
     \label{fig:reinforce_learning_system}
 \end{figure}
