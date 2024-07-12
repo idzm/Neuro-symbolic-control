@@ -350,7 +350,7 @@
         \end{equation}
 
         \begin{equation}
-            \gamma_j = \sum_{i}{\gamma_iF^\prime(S_i)\omega_{j i}}.
+            \gamma_i = \sum_{i}{\gamma_jF^\prime(S_i)\omega_{j i}}.
         \end{equation}
 
         В последнем выражении индекс $i$ характеризует нейронные элементы следующего слоя по отношению к слою $j$.
@@ -358,7 +358,7 @@
         \item для каждого слоя нейронной сети происходит изменение весовых коэффициентов и порогов нейронных элементов:
 
         \begin{equation}
-            \omega_{i j}(t  1) = \omega_{i j}(t) - \alpha\gamma_jF^\prime(S_j)y_i,
+            \omega_{i j}(t + 1) = \omega_{i j}(t) - \alpha\gamma_jF^\prime(S_j)y_i,
         \end{equation}
 
         \begin{equation}
