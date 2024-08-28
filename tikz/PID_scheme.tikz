@@ -1,0 +1,39 @@
+\usetikzlibrary {arrows.meta,graphs,shapes.misc,quotes}
+\tikz [ skip loop/.style = {to path={-- ++(0,#1) -| (\tikztotarget)}},
+       hv path/.style = {to path={-| (\tikztotarget)}},
+       vh path/.style = {to path={|- (\tikztotarget)}},
+       box/.style = {
+         rectangle,
+         minimum size=10mm,
+         very thick, draw=black, text height=1.5ex,text depth=.25ex},
+       only_text/.style = { minimum size=6mm, very thick, text height=1.5ex,text depth=.25ex},
+       circle/.style = {
+         rounded rectangle, minimum size=6mm, very thick, draw=black!50, top color=white,
+         bottom color=black!20, font=\ttfamily, text height=1.5ex, text depth=.25ex},
+       %shape = coordinate
+       ]
+  \graph [grow right sep, branch down=15mm, simple] {
+    / задание [only_text] -> s1/"$\Sigma$" [circle] ->
+    ошибка [only_text] -> [vh path]
+        {
+        [nodes={yshift=15mm}]
+        p/"\textbf{P} \hspace{2mm} $K_P e(t)$"[box],
+        i/"\textbf{I} \hspace{2mm} $K_I \int_{0}^{t} e(t) dt$"[box],
+        d/"\textbf{D} \hspace{2mm} $K_D \frac{de}{dt}$"[box]
+        } -> [hv path]
+    s2/"$\Sigma$" [circle] -> "\textbf{процесс}" [box] ->
+    выход [only_text] -> /;
+
+    выход ->[skip loop=-25mm] s1;
+
+    ошибка -> i -> s2; % Make these connection plain.
+  };
+
+%\tikzstyle{box}=[rectangle,draw=black,thick]
+
+%\begin{tikzpicture}
+%    \node [box]            (P) {\textbf{P} $K_p e(t)$};
+%    \node [box,below = 1cm of P ] (I) {\textbf{I} $ K_I \int_{0}^{t} e(t) dt$};
+%
+%    \draw [->] (P) -- (I);
+%\end{tikzpicture}
