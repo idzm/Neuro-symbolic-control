@@ -7,6 +7,9 @@
 \usepackage{etoolbox,ifxetex,ifluatex}
 \usepackage[unicode,hypertexnames=false]{hyperref}
 
+\usepackage{tikz} % Language for producing vector graphics
+\usetikzlibrary{quotes,positioning,arrows.meta,arrows,calc}
+
 %%% Проверка используемого TeX-движка %%%
 \ifboolexpr{bool{xetex} or bool{luatex}}{%
   \usepackage{fontspec}
@@ -110,7 +113,7 @@ Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )
 
 \usepackage{siunitx} % For Celsium sign only
 
-\usepackage{tikz} % Language for producing vector graphics
+\usepackage{standalone}
 
 \begin{document}
 
