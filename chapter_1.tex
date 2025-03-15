@@ -583,8 +583,92 @@
 Данная классификация имеет достаточно размытые границы, что отражено на графической иллюстрации ниже (рис. \ref{fig:neuro_control_classification}).
 
 \begin{figure}[H]
+	\tikzset{fontMethod/.style={font=\bfseries\normalsize}} 
+	\tikzset{fontLabel/.style={font=\normalsize}}
+	
     \centering
-    \includegraphics[width=\textwidth]{images/chapter_1/Классификация нейросетевых приемов решения задач управления.png}
+    
+    \pgfdeclarepatternformonly{custom vertical lines}{\pgfqpoint{0pt}{0pt}}{\pgfqpoint{10pt}{10pt}}{\pgfqpoint{6pt}{10pt}}{
+    	\pgfsetlinewidth{0.35pt}
+    	\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+    	\pgfpathlineto{\pgfqpoint{0pt}{10pt}}
+    	\pgfusepath{stroke}
+    }
+    
+    \pgfdeclarepatternformonly{custom horizontal lines}{\pgfqpoint{0pt}{0pt}}{\pgfqpoint{10pt}{10pt}}{\pgfqpoint{10pt}{6pt}}{
+    	\pgfsetlinewidth{0.35pt}
+    	\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+    	\pgfpathlineto{\pgfqpoint{10pt}{0pt}}
+    	\pgfusepath{stroke}
+    }
+    
+   	\selectlanguage{russian}
+   	\begin{tikzpicture}
+   		
+   		\def\ellipseWidth{8cm}
+	   	\def\ellipseHeight{2.4cm}
+	   	
+	   	\def\lineThickness{0.3pt}
+	   	
+	   	\coordinate (A) at (0,0);
+	   	\coordinate (B) at ($(A) + (1.5,0)$);
+	   	\coordinate (C) at ($(A) ! .5 ! (B) ! {sin(60)*1.5} ! 90:(B)$);
+	   	
+	   	\def\offset{0.65}
+	   	\coordinate (A1) at ($(A) + (-\offset*2, 0)$); 
+	   	\coordinate (B1) at ($(B) + (\offset*2, 0)$);
+	   	\coordinate (C1) at ($(C) + (0, \offset)$); 
+	   	
+	   	\node[draw, ellipse, minimum width=\ellipseWidth, minimum height=\ellipseHeight, pattern=custom vertical lines, line width=\lineThickness] at (A1) {};
+	   	
+	   	\node[draw, ellipse, minimum width=\ellipseWidth, minimum height=\ellipseHeight, pattern=custom horizontal lines, line width=\lineThickness] at (B1) {};
+	   	
+	   	\node[draw, ellipse, minimum width=\ellipseWidth, minimum height=\ellipseHeight, pattern color=blue, pattern= dots, line width=\lineThickness] at (C1) {};
+	   	
+	   	\coordinate (AL) at ($(A) - ({\ellipseWidth/1.8}, 0)$); 
+	   	\coordinate (BR) at ($(B) + ({\ellipseWidth/1.8}, 0)$);
+	   	\coordinate (CA) at ($(C) + (0, {\ellipseHeight/5})$);
+	   	\coordinate (CB) at ($(A) ! .5 ! (B)$); 
+	   	
+	   	
+	   	\node[fontMethod] at (AL) {Аппроксимация};
+	   	\node[fontMethod] at (BR) {Оптимизация}; 
+	   	\node[fontMethod] at (CB) {Адаптация};
+	   	\node[font={\bfseries\small}] at ($(CA) + (0, 0.2)$) {Традиционные системы управления};
+	   	
+	   	\coordinate (SSMD) at ($(AL) + (0.5, 0.6)$);
+	   	\draw [fill=black] (SSMD) circle(1.5pt);
+	   	\draw (SSMD) -- ++(0.4, 2.4) -- ++(4,0);
+	   	\node[fontLabel] at ($(SSMD) + (2.4, 3)$) {Последовательная};
+	   	\node[fontLabel] at ($(SSMD) + (2.4, 2.6)$) {схема управления};
+	   	
+	   	\coordinate (PSMD) at ($(CB) + (-0.6, -0.6)$);
+	   	\draw [fill=black] (PSMD) circle(1.5pt);
+	   	\draw (PSMD) -- ++(-0.9, -1.5) -- ++(-4,0);
+	   	\node[fontLabel] at ($(PSMD) + (-3.2, -0.9)$) {Параллельная};
+	   	\node[fontLabel] at ($(PSMD) + (-2.8, -1.3)$) {схема управления};
+	   	
+	   	\coordinate (SMSS) at ($(CB) + (0.6, 0.6)$);
+	   	\draw [fill=black] (SMSS) circle(1.5pt);
+	   	\draw (SMSS) -- ++(0.75, -3.8) -- ++(4,0);
+	   	\node[fontLabel] at ($(PSMD) + (4, -2)$) {Схема управления};
+	   	\node[fontLabel] at ($(PSMD) + (4, -2.4)$) {с самонастройкой};
+	   	
+	   	\coordinate (SMEC) at ($(CB) + (0.4, -0.7)$);
+	   	\draw [fill=black] (SMEC) circle(1.5pt);
+	   	\draw (SMEC) -- ++(-0.75, -2.9) -- ++(-3.9,0);
+	   	\node[fontLabel] at ($(SMEC) + (-2.6, -1.9)$) {Схема управления};
+	   	\node[fontLabel] at ($(SMEC) + (-2.9, -2.3)$) {с эмулятором и};
+	   	\node[fontLabel] at ($(SMEC) + (-3.1, -2.65)$) {контроллером};
+	   	
+	   	\coordinate (ACS) at ($(B) + (1.2, -0.7)$);
+	   	\draw [fill=black] (ACS) circle(1.5pt);
+	   	\draw (ACS) -- ++(0.7, -1.5) -- ++(4.3,0);
+	   	\node[fontLabel] at ($(ACS) + (2, -0.9)$) {Адаптивно-};
+	   	\node[fontLabel] at ($(ACS) + (2.8, -1.3)$) {критическая схема};
+   		
+   	\end{tikzpicture}
+    
     \caption{Классификация нейросетевых приемов решения задач управления}
     \label{fig:neuro_control_classification}
 \end{figure}
