@@ -6,10 +6,51 @@
 \section{ПИД-регуляторы}
 
 ПИД-регуляторы доказали свою эффективность в управлении разнообразными процессами. Их использование не требует знания точной модели процесса, поэтому они эффективны в управлении промышленными и технологическими процессами, математические модели которых достаточно сложно определить. ПИД-регуляторы строятся на основе классической теории управления и просты для понимания и реализации (рис. \ref{fig:PID_controller_scheme}).
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/chapter_1/Структурная схема ПИД-регулятора.png}
+    	\begin{tikzpicture}[scale=0.6]
+    	\node at (0,5) {\fontsize{6}{0}\selectfont задание};
+    	\draw[->] (0.8,5) -- (2.4,5);
+    	%отрисовка сумматора и стрелки от него
+    	\draw (3,5) circle [radius=0.5cm];
+    	\node at (2.7,5.8) {\fontsize{6}{0}\selectfont +};
+    	\node at (2.7,4.2) {\fontsize{6}{0}\selectfont -};
+    	\node at (3,5) {\fontsize{8}{0}\selectfont$\sum$};
+    	\draw[->] (3.6,5) -- (5,5);
+    	\node at (6,5){\fontsize{6}{0}\selectfont ошибка};
+    	%отрисовка линий после "ошибка"
+    	\draw[->] (6.8,5) -- (8,5);
+    	\draw (6,5.2) -- (6,7);
+    	\draw[->] (6,7)--(8,7);
+    	\draw (6,4.8) -- (6,3);
+    	\draw[->] (6,3)--(8,3);
+    	%отрисовка PID блоков
+    	\draw (8.2,6.25) rectangle(12,7.75);
+    	\draw (8.2,4.25) rectangle(12,5.75);
+    	\draw (8.2,2.25) rectangle(12,3.75);
+    	\node at (10,7){\fontsize{8}{0}\selectfont $P\ \ \ \ \ \ \ K_p e(t)$};
+    	\node at (10,5){\fontsize{8}{0}\selectfont$I\ \ K_i \int e(t) \,{d}x$};
+    	\node at (10,3){\fontsize{8}{0}\selectfont$D \ \ \ \ \ \ \ \ \ K_d\frac{\partial e}{\partial t}$};
+    	%Отрисовка стрелочек и сумматора после PID блоков
+    	\draw (14,5) circle [radius=0.5cm];
+    	\node at (14,5) {\fontsize{8}{0}\selectfont$\sum$};
+    	\draw(12.2,7)--(14,7);
+    	\draw [->](14,7)--(14,5.7);
+    	\draw [->](12.2,5)--(13.4,5);
+    	\draw(12.2,3)--(14,3);
+    	\draw [->](14,3)--(14,4.4);
+    	%отрисовка блока процесса, выхода и стрелочек от них
+    	\draw [->](14.6,5)--(15.6,5);
+    	\draw (15.8,4.25) rectangle(19.6,5.75);
+    	\node at (17.7,5){\fontsize{8}{0}\selectfont процесс};
+    	\draw[->](19.7,5)--(20.2,5);
+    	\node at (21,5){\fontsize{6}{0}\selectfont выход};
+    	\draw[->](21.7,5)--(22.5,5);
+    	\draw (21,4.8)--(21,1.5);
+    	\draw (21,1.5)--(3,1.5);
+    	\draw[->](3,1.5)--(3,4.4);
+    \end{tikzpicture}
+    
     \caption{Структурная схема ПИД-регулятора}
     \label{fig:PID_controller_scheme}
 \end{figure}
