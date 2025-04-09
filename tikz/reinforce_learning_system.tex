@@ -1,0 +1,51 @@
+% Use ’standalone’ as document class:
+\documentclass{standalone}
+% Load packages needed for this TeX file:
+\usepackage{tikz}
+\usetikzlibrary{quotes,positioning,arrows.meta,arrows,calc}
+
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Surround TeX code with ’document’ environment as usually:
+\begin{document}
+% Add your TeX code, e.g. a picture:
+
+\tikzset{
+    box/.style={
+            % The shape:
+            rectangle,
+            % The size:
+            minimum size=20mm,
+            % The border:
+            very thick,
+            draw=red!50!black!50,         % 50% red and 50% black,
+            % and that mixed with 50% white
+            % The filling:
+            top color=white,              % a shading that is white at the top...
+            bottom color=red!50!black!20, % and something else at the bottom
+            % Font
+            font=\itshape,
+            align=center}
+}
+
+\tikzset{big_arrow/.style={-{Stealth[length=5mm, width=4mm]}}}
+
+\begin{tikzpicture}[
+        right1/.style={to path={-- ++(5,0) |- (\tikztotarget)}},
+        left1/.style={to path={-- ++(-5,0) |- (\tikztotarget)}}]
+    \node (o1)   [box]                        {Объект\\управления};
+    \node (u1)   [below=of o1,align=center]   {$\mathbf{ U(t) }$\\Эффективность};
+    \node (c1)   [box,below=of u1]            {Управляющее\\устройство\\(контроллер)};
+
+    \node (control) [right=of c1,align=center]  {$\mathbf{ u(t) }$\\Управление};
+    \node (sensors) [left=of c1,align=center]   {$\mathbf{ X(t) }$\\Показания датчиков};
+
+    \path {
+        (o1)            edge[very thick]                     (u1)
+        (u1)            edge[very thick, big_arrow]          (c1)
+        ($ (c1.east) $) edge[very thick, big_arrow, right1]  ($ (o1.east) $)
+        ($ (o1.west) $) edge[very thick, big_arrow, left1]   ($ (c1.west) $) };
+
+\end{tikzpicture}
+\end{document}
