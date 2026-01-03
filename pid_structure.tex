@@ -1,0 +1,82 @@
+\documentclass[tikz, border=10pt]{standalone}
+\usepackage[T2A]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usetikzlibrary{shapes, arrows, positioning, calc}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    auto, 
+    node distance=2cm, 
+    >=latex',
+    label_node/.style={inner sep=3pt},
+    block/.style={
+        draw, 
+        fill=white, 
+        rectangle, 
+        minimum height=1.1cm, 
+        minimum width=3.3cm,  
+        text width=3.0cm,     
+        align=left,           
+        inner xsep=5pt        
+    },
+    sum/.style={draw, fill=white, circle, inner sep=2pt}
+]
+
+    % Узлы
+    
+    \node (input_text) at (0,0) {задание};
+    \node [coordinate, right=0.01cm of input_text] (input_start) {};
+    \node [sum, right=2cm of input_start] (sum1) {\Large $\Sigma$};
+    
+    \node [coordinate, right=1.5cm of sum1] (branch) {};
+    
+    % Блоки P, I, D
+    \node [block, right=3.5cm of sum1] (integral) {
+        \textbf{I} \hfill $K_i \int\limits_{0}^{t} e(t) dt$
+    };
+    \node [block, above=0.6cm of integral] (prop) {
+        \textbf{P} \hfill $K_p e(t)$
+    };
+    \node [block, below=0.6cm of integral] (deriv) {
+        \textbf{D} \hfill $K_d \frac{de}{dt}$
+    };
+    
+    % Сумматор и процесс
+    \node [sum, right=1.5cm of integral] (sum2) {\Large $\Sigma$};
+    \node [block, right=1.0cm of sum2, minimum width=2.0cm, text width=1.8cm, align=center] (process) {\textbf{процесс}};
+    
+    \node [label_node, right=0.6cm of process] (out_text) {выход};
+    \node [coordinate, right=0.6cm of out_text] (feedback_node) {};
+    \node [coordinate, right=0.8cm of feedback_node] (out_end) {};
+
+    % Линии и связи
+
+    \draw [->] (input_start) -- node[above, pos=0.9] {$+$} (sum1);
+    
+    % Узел "ошибка"
+    \node [fill=white, inner sep=2pt] (err_text) at (branch) {ошибка};
+    \draw [->, shorten >= 1pt] (sum1) -- (err_text);
+    
+    \draw [->] (err_text) -- (integral);
+    \draw [->] (err_text) |- (prop);
+    \draw [->] (err_text) |- (deriv);
+    
+    \draw [->] (prop) -| (sum2);
+    \draw [->] (integral) -- (sum2);
+    \draw [->] (deriv) -| (sum2);
+    
+    % Выходной тракт
+    \draw [->] (sum2) -- (process);
+    \draw [->, shorten >= 1pt] (process) -- (out_text);
+    \draw (out_text) -- (feedback_node);
+    \draw [->] (feedback_node) -- (out_end);
+    
+    % Обратная связь
+    \draw [->] (feedback_node) |- ++(0,-3.2) -| node[left, pos=0.97] {$-$} (sum1);
+
+\end{tikzpicture}
+
+\end{document}
