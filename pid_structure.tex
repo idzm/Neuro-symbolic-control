@@ -5,13 +5,19 @@
 \usepackage{amsmath}
 \usetikzlibrary{shapes, arrows, positioning, calc}
 
+% PID controller structure diagram:
+% shows the control loop with setpoint (задание), error signal,
+% proportional / integral / derivative (P/I/D) controller blocks,
+% the controlled process (plant), and the feedback path from the
+% process output back to the summing junction.
+
 \begin{document}
 
 \begin{tikzpicture}[
     auto, 
     node distance=2cm, 
     >=latex',
-    label_node/.style={inner sep=3pt},
+    signal_label/.style={fill=white, inner sep=2pt},
     block/.style={
         draw, 
         fill=white, 
@@ -22,17 +28,24 @@
         align=left,           
         inner xsep=5pt        
     },
+    process_block/.style={
+        block,
+        minimum width=2.0cm, 
+        text width=1.8cm, 
+        align=center
+    },
     sum/.style={draw, fill=white, circle, inner sep=2pt}
 ]
 
     % Nodes
-    \node (input_text) {задание};
+    
+    \node [signal_label] (input_text) {задание};
     \node [sum, right=1.5cm of input_text] (sum1) {\Large $\Sigma$};
     
     % Branch point for distributing error signal to P, I, D blocks
     \node [coordinate, right=1cm of sum1] (branch) {};
     
-    % PID controller blocks with consistent e(t) notation
+    % PID controller blocks
     \node [block, right=2.5cm of sum1] (integral) {
         \textbf{I} \hfill $K_i \int_{0}^{t} e(t) dt$
     };
@@ -43,12 +56,10 @@
         \textbf{D} \hfill $K_d \frac{de}{dt}$
     };
     
-    % Summation node after controller and Process block
+    % Summation node after controller
     \node [sum, right=1.5cm of integral] (sum2) {\Large $\Sigma$};
-    \node [block, right=1.0cm of sum2, minimum width=2.0cm, text width=1.8cm, align=center] (process) {\textbf{процесс}};
-    
-    % Output text label and feedback branch point
-    \node [label_node, right=0.8cm of process] (out_text) {выход};
+    \node [process_block, right=1.0cm of sum2] (process) {\textbf{процесс}};
+    \node [signal_label, right=0.8cm of process] (out_text) {выход};
     \node [coordinate] (feedback_node) at ($(out_text.east) + (0.3,0)$) {};
 
     % Connections
@@ -57,7 +68,7 @@
     \draw [->] (input_text) -- node[above, pos=0.9] {$+$} (sum1);
     
     % Error signal and branching to P, I, D
-    \node [fill=white, inner sep=2pt] (err_text) at (branch) {ошибка};
+    \node [signal_label] (err_text) at (branch) {ошибка};
     \draw [->] (sum1) -- (err_text);
     
     \draw [->] (err_text) -- (integral);
