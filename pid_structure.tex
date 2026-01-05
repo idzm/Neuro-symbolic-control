@@ -1,5 +1,5 @@
 \documentclass[tikz, border=10pt]{standalone}
-\usepackage[T2A]{fontenc} 
+\usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[russian]{babel}
 \usepackage{amsmath}
@@ -17,8 +17,8 @@
         fill=white, 
         rectangle, 
         minimum height=1.1cm, 
-        minimum width=3.3cm,  
-        text width=3.0cm,     
+        minimum width=3.5cm, 
+        text width=3.2cm,    
         align=left,           
         inner xsep=5pt        
     },
@@ -26,16 +26,15 @@
 ]
 
     % Узлы
+    \node (input_text) {задание};
+    \node [sum, right=1.5cm of input_text] (sum1) {\Large $\Sigma$};
     
-    \node (input_text) at (0,0) {задание};
-    \node [coordinate, right=0.01cm of input_text] (input_start) {};
-    \node [sum, right=2cm of input_start] (sum1) {\Large $\Sigma$};
-    
-    \node [coordinate, right=1.5cm of sum1] (branch) {};
+    % Точка разветвления ошибки
+    \node [coordinate, right=1cm of sum1] (branch) {};
     
     % Блоки P, I, D
-    \node [block, right=3.5cm of sum1] (integral) {
-        \textbf{I} \hfill $K_i \int\limits_{0}^{t} e(t) dt$
+    \node [block, right=2.5cm of sum1] (integral) {
+        \textbf{I} \hfill $K_i \int_{0}^{t} e(t) dt$
     };
     \node [block, above=0.6cm of integral] (prop) {
         \textbf{P} \hfill $K_p e(t)$
@@ -44,37 +43,41 @@
         \textbf{D} \hfill $K_d \frac{de}{dt}$
     };
     
-    % Сумматор и процесс
+    % Сумматор после регулятора и Процесс
     \node [sum, right=1.5cm of integral] (sum2) {\Large $\Sigma$};
     \node [block, right=1.0cm of sum2, minimum width=2.0cm, text width=1.8cm, align=center] (process) {\textbf{процесс}};
     
-    \node [label_node, right=0.6cm of process] (out_text) {выход};
-    \node [coordinate, right=0.6cm of out_text] (feedback_node) {};
-    \node [coordinate, right=0.8cm of feedback_node] (out_end) {};
+    % Текст выхода и точка разветвления обратной связи
+    \node [label_node, right=0.8cm of process] (out_text) {выход};
+    \node [coordinate] (feedback_node) at ($(out_text.east) + (0.3,0)$) {};
 
-    % Линии и связи
+    % Связи
 
-    \draw [->] (input_start) -- node[above, pos=0.9] {$+$} (sum1);
+    % Входной сигнал
+    \draw [->] (input_text) -- node[above, pos=0.9] {$+$} (sum1);
     
-    % Узел "ошибка"
+    % Сигнал ошибки и разветвление на P, I, D
     \node [fill=white, inner sep=2pt] (err_text) at (branch) {ошибка};
-    \draw [->, shorten >= 1pt] (sum1) -- (err_text);
+    \draw [->] (sum1) -- (err_text);
     
     \draw [->] (err_text) -- (integral);
     \draw [->] (err_text) |- (prop);
     \draw [->] (err_text) |- (deriv);
     
+    % Объединение сигналов в sum2
     \draw [->] (prop) -| (sum2);
     \draw [->] (integral) -- (sum2);
     \draw [->] (deriv) -| (sum2);
     
-    % Выходной тракт
+    % От регулятора к процессу и на выход
     \draw [->] (sum2) -- (process);
-    \draw [->, shorten >= 1pt] (process) -- (out_text);
-    \draw (out_text) -- (feedback_node);
-    \draw [->] (feedback_node) -- (out_end);
+    \draw [->] (process) -- (out_text);
     
-    % Обратная связь
+    % Завершающая стрелка выхода
+    \draw (out_text) -- (feedback_node);
+    \draw [->] (feedback_node) -- ++(1,0);
+    
+    % Линия обратной связи
     \draw [->] (feedback_node) |- ++(0,-3.2) -| node[left, pos=0.97] {$-$} (sum1);
 
 \end{tikzpicture}
