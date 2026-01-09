@@ -1,0 +1,46 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc} 
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel} 
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns,arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}[font=\small,
+  arrow/.style={thick}
+]
+
+\coordinate (Center) at (0,0);
+\coordinate (RightCenterLabel) at (3.5, -1.0);
+\coordinate (LeftCenter) at (-1.5,-1.0);
+\coordinate (CenterLabel) at (0.0,-1.0);
+\coordinate (RightCenter) at (1.5,-1.0);
+\coordinate (LeftLabel) at (-3.5,-1.0);
+
+\draw[fill=black!30, pattern color=black!60,thick] (Center) ellipse (3.0 and 0.8);
+\draw[pattern=vertical lines,pattern color=black!60,thick] (LeftCenter) ellipse (3.0 and 0.8);
+\draw[pattern=horizontal lines,pattern color=black!60,thick] (RightCenter) ellipse (3.0 and 0.8);
+
+\node at (Center) {\textbf{Традиционные системы управления}};
+\node at (CenterLabel) {\textbf{Адаптация}};
+\node at (LeftLabel) {\textbf{Аппроксимация}};
+\node at (RightCenterLabel) {\textbf{Оптимизация}};
+
+\fill ($(Center)+(-0.5,-1.2)$) circle (2pt);
+\draw[arrow] ($(Center)+(-0.5,-1.2)$) -- ++(-1.2,-1.6) -- ++(-1.5,0) node[above, align=left]{Параллельная\\схема управления};
+
+\fill ($(Center)+(0.5,-1.5)$) circle (2pt);
+\draw[arrow] ($(Center)+(0.5,-1.5)$) -- ++(-1.2,-3.0) -- ++(-1.5,0) node[above, align=left]{Схема управления с\\эмулятором и\\контроллером};
+
+\fill ($(Center)+(0.2,-0.6)$) circle (2pt);
+\draw[arrow] ($(Center)+(0.2,-0.6)$) -- ++(1.2,-3.0) -- ++(1.5,0) node[above, align=left]{Схема управления\\с самонастройкой};
+
+\fill ($(Center)+(2.0,-1.2)$) circle (2pt);
+\draw[arrow] ($(Center)+(2.0,-1.2)$) -- ++(1.2,-1.0) -- ++(2.5,0) node[above, align=left]{Адаптивно-\\критическая схема};
+
+\fill ($(Center)+(-3.0,-0.6)$) circle (2pt);
+\draw[arrow] ($(Center)+(-3.0,-0.6)$) -- ++(-1.0,0.5) -- ++(-2.5,0) node[above, align=left]{Последовательная схема\\управления};
+
+\end{tikzpicture}
+\end{document}
