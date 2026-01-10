@@ -31,23 +31,22 @@
     sum/.style={draw, fill=white, circle, inner sep=1pt}
 ]
 
-    % --- Nodes ---
+    % Nodes 
     
     \node [signal_label] (input_text) {задание};
     \node [sum, right=0.6cm of input_text] (sum1) {\Large $\Sigma$};
     
-    % Уменьшено общее расстояние между сумматорами для компактности
+    % Main control loop distance
     \node [sum, right=5.5cm of sum1] (sum2) {\Large $\Sigma$}; 
 
-    % Точка разветвления (ошибка)
+    % Branch point (error signal)
     \node [coordinate, right=1cm of sum1] (branch) {};
 
-    % Размещение блоков ровно посередине между branch и sum2
+    % PID Blocks: positioned exactly between branch and sum2
     \node [block] (integral) at ($(branch)!0.5!(sum2)$) {
         \textbf{I} \hfill $K_i \int_{0}^{t} e(t) dt$
     };
     
-    % Уменьшен вертикальный отступ между блоками (1.2 вместо 1.5)
     \node [block] (prop) at ($(integral.center) + (0, 1.2)$) {
         \textbf{P} \hfill $K_p e(t)$
     };
@@ -56,24 +55,26 @@
         \textbf{D} \hfill $K_d \frac{de}{dt}$
     };
     
-    % Процесс и выход расположены ближе
+    % Process and output nodes
     \node [process_block, right=0.6cm of sum2] (process) {\textbf{процесс}};
     \node [signal_label, right=0.6cm of process] (out_text) {выход};
     
     \node [coordinate] (end_point) at ($(out_text.east) + (0.6,0)$) {};
     \node [coordinate] (feedback_node) at ($(out_text.east)!0.5!(end_point)$) {};
 
-    % --- Connections ---
+    % Connections
 
     \draw [->] (input_text) -- node[above, pos=0.8, font=\footnotesize] {$+$} (sum1);
     
     \node [signal_label] (err_text) at (branch) {ошибка};
     \draw [->] (sum1) -- (err_text);
     
+    % Signal branching to PID components
     \draw [->] (err_text) -- (integral);
     \draw [->] (err_text) |- (prop);
     \draw [->] (err_text) |- (deriv);
     
+    % Signal summing from PID components
     \draw [->] (prop) -| (sum2);
     \draw [->] (integral) -- (sum2);
     \draw [->] (deriv) -| (sum2);
@@ -82,7 +83,8 @@
     \draw [->] (process) -- (out_text);
     
     \draw [->] (out_text) -- (end_point);
-    % Линия обратной связи стала компактнее по высоте
+
+    % Feedback loop
     \draw [->] (feedback_node) |- ++(0,-2.0) -| node[left, pos=0.98, font=\footnotesize] {$-$} (sum1);
 
 \end{tikzpicture}
