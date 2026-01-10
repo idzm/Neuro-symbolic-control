@@ -1,0 +1,92 @@
+\documentclass[tikz, border=10pt]{standalone}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usetikzlibrary{shapes, arrows, positioning, calc}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    auto, 
+    node distance=1.5cm, 
+    >=latex',
+    signal_label/.style={fill=white, inner sep=1.5pt, font=\small},
+    block/.style={
+        draw, 
+        fill=white, 
+        rectangle, 
+        minimum height=0.9cm, 
+        minimum width=2.4cm, 
+        text width=2.2cm,    
+        align=center,          
+        inner xsep=3pt,
+        font=\small
+    },
+    process_block/.style={
+        block,
+        minimum width=1.6cm, 
+        text width=1.4cm
+    },
+    sum/.style={draw, fill=white, circle, inner sep=1pt}
+]
+
+    % Nodes 
+    
+    \node [signal_label] (input_text) {задание};
+    \node [sum, right=0.6cm of input_text] (sum1) {\Large $\Sigma$};
+    
+    % Main control loop distance
+    \node [sum, right=5.5cm of sum1] (sum2) {\Large $\Sigma$}; 
+
+    % Branch point (error signal)
+    \node [coordinate, right=1cm of sum1] (branch) {};
+
+    % PID Blocks: positioned exactly between branch and sum2
+    \node [block] (integral) at ($(branch)!0.5!(sum2)$) {
+        \textbf{I} \hfill $K_i \int_{0}^{t} e(t) dt$
+    };
+    
+    \node [block] (prop) at ($(integral.center) + (0, 1.2)$) {
+        \textbf{P} \hfill $K_p e(t)$
+    };
+    
+    \node [block] (deriv) at ($(integral.center) + (0, -1.2)$) {
+        \textbf{D} \hfill $K_d \frac{de}{dt}$
+    };
+    
+    % Process and output nodes
+    \node [process_block, right=0.6cm of sum2] (process) {\textbf{процесс}};
+    \node [signal_label, right=0.6cm of process] (out_text) {выход};
+    
+    \node [coordinate] (end_point) at ($(out_text.east) + (0.6,0)$) {};
+    \node [coordinate] (feedback_node) at ($(out_text.east)!0.5!(end_point)$) {};
+
+    % Connections
+
+    \draw [->] (input_text) -- node[above, pos=0.8, font=\footnotesize] {$+$} (sum1);
+    
+    \node [signal_label] (err_text) at (branch) {ошибка};
+    \draw [->] (sum1) -- (err_text);
+    
+    % Signal branching to PID components
+    \draw [->] (err_text) -- (integral);
+    \draw [->] (err_text) |- (prop);
+    \draw [->] (err_text) |- (deriv);
+    
+    % Signal summing from PID components
+    \draw [->] (prop) -| (sum2);
+    \draw [->] (integral) -- (sum2);
+    \draw [->] (deriv) -| (sum2);
+    
+    \draw [->] (sum2) -- (process);
+    \draw [->] (process) -- (out_text);
+    
+    \draw [->] (out_text) -- (end_point);
+
+    % Feedback loop
+    \draw [->] (feedback_node) |- ++(0,-2.0) -| node[left, pos=0.98, font=\footnotesize] {$-$} (sum1);
+
+\end{tikzpicture}
+
+\end{document}
