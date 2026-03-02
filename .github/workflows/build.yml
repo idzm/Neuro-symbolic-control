@@ -21,7 +21,7 @@ jobs:
         run: |
           latexmk -pdf -outdir=out ./main.tex
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: main.pdf
           path: out/main.pdf
