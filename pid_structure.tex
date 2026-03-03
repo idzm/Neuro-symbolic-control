@@ -18,11 +18,11 @@
 
   % PID Blocks: positioned exactly between branch and sum2
   \node [block] (integral) at ($(branch)!0.5!(sum2)$)
-    { \textbf{I} $K_i \int_{0}^{t} e(t) dt$ };
+    { \textbf{I} $K_I \int_{0}^{t} e(t) dt$ };
   \node [block] (prop) at ($(integral.center) + (0, 1.2)$)
-    { \textbf{P} \qquad $K_p e(t)$ };
+    { \textbf{P} \qquad $K_P e(t)$ };
   \node [block] (deriv) at ($(integral.center) + (0, -1.2)$)
-    { \textbf{D} \qquad $K_d \frac{de}{dt}$ };
+    { \textbf{D} \qquad $K_D \frac{de}{dt}$ };
 
   % Process and output nodes
   \node [process_block, right=0.6cm of sum2] (process) {\textbf{процесс}};
