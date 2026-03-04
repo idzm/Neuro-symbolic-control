@@ -1,9 +1,9 @@
 \begin{tikzpicture}[ auto, node distance=1.5cm, >=Latex,
     signal_label/.style={fill=white, inner sep=1.5pt, font=\small},
-    block/.style={ draw, fill=white, rectangle, minimum height=0.9cm, minimum
-        width=2.4cm, align=center, inner xsep=3pt, font=\small },
-    process_block/.style={ block, minimum width=1.6cm },
-    sum/.style={draw, fill=white, circle, inner sep=1pt} ]
+    block/.style={draw, fill=white, rectangle, align=center,
+      minimum height=2*\ht\strutbox, minimum width=7*\ht\strutbox,
+      font=\small},
+  sum/.style={draw, fill=white, circle, inner sep=1pt} ]
 
   % Nodes
 
@@ -11,10 +11,10 @@
   \node [sum, right=0.6cm of input_text] (sum1) {\Large $\Sigma$};
 
   % Main control loop distance
-  \node [sum, right=5.5cm of sum1] (sum2) {\Large $\Sigma$};
+  \node [sum, right=6.5cm of sum1] (sum2) {\Large $\Sigma$};
 
   % Branch point (error signal)
-  \node [coordinate, right=1cm of sum1] (branch) {};
+  \node [coordinate, right=1.2cm of sum1] (branch) {};
 
   % PID Blocks: positioned exactly between branch and sum2
   \node [block] (integral) at ($(branch)!0.5!(sum2)$)
@@ -25,7 +25,7 @@
     { \textbf{D} \qquad $K_D \frac{de}{dt}$ };
 
   % Process and output nodes
-  \node [process_block, right=0.6cm of sum2] (process) {\textbf{процесс}};
+  \node [block, right=0.6cm of sum2] (process) {\textbf{процесс}};
 
   \node [signal_label, right=0.6cm of process] (out_text) {выход};
 
