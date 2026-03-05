@@ -9,7 +9,7 @@
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/chapter_1/Структурная схема ПИД-регулятора.png}
+    \resizebox{\textwidth}{!}{\input{pid_structure}}
     \caption{Структурная схема ПИД-регулятора}
     \label{fig:PID_controller_scheme}
 \end{figure}
@@ -584,7 +584,8 @@
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/chapter_1/Классификация нейросетевых приемов решения задач управления.png}
+    \resizebox{\textwidth}{!}{
+        \input{images/chapter_1/nn_methods_classification_for_solving_control_problems.tex}}
     \caption{Классификация нейросетевых приемов решения задач управления}
     \label{fig:neuro_control_classification}
 \end{figure}
@@ -672,4 +673,4 @@
 
 \section{Постановка задачи}
 
-Разработать \textbf{семантический нейро-ПИД-регулятор} для использования в проектах АСУТП, также использовать описание в виде онтологии стандарта \textbf{ISA-88} - уровень \textbf{SCADA} - как часть интеллектуальной системы управления.
+Разработать \textbf{нейро-символический ПИД-регулятор} для использования в проектах АСУТП, также использовать описание в виде онтологии стандарта \textbf{ISA-88} - уровень \textbf{SCADA} - как часть интеллектуальной системы управления, при этом руководствоваться современными подходами \cite{Бурков2022}.
