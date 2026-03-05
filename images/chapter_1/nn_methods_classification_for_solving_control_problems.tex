@@ -1,4 +1,4 @@
-\begin{tikzpicture}[font=\footnotesize, arrow/.style={thick}]
+\begin{tikzpicture}[font=\footnotesize, arrow/.style={thick,-}]
 
 \coordinate (Center) at (0,0);
 \coordinate (RightCenterLabel) at (3.5, -1.0);
@@ -7,8 +7,7 @@
 \coordinate (RightCenter) at (1.5,-1.0);
 \coordinate (LeftLabel) at (-3.5,-1.0);
 
-\draw[fill=black!30, pattern color=black!60,thick]
-  (Center) ellipse (4 and 0.7);
+\draw[fill=black!20, thick] (Center) ellipse (4 and 0.7);
 \draw[pattern=vertical lines,pattern color=black!60,thick]
   (LeftCenter) ellipse (3.0 and 0.8);
 \draw[pattern=horizontal lines,pattern color=black!60,thick]
