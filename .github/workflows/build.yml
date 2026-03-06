@@ -19,7 +19,7 @@ jobs:
 
       - name: Build PDF
         run: |
-          latexmk -pdf -outdir=out ./main.tex
+          latexmk -pdf -outdir=out -shell-escape ./main.tex
 
       - uses: actions/upload-artifact@v7
         with:
