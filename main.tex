@@ -8,7 +8,8 @@
 \usepackage[unicode,hypertexnames=false]{hyperref}
 
 \usepackage{tikz} % Language for producing vector graphics
-\usetikzlibrary{quotes,positioning,arrows.meta,arrows,calc}
+\usetikzlibrary{quotes, positioning, arrows.meta, arrows, calc, shapes,
+  patterns}
 
 %%% Проверка используемого TeX-движка %%%
 \ifboolexpr{bool{xetex} or bool{luatex}}{%
@@ -114,10 +115,10 @@ Style2*=$\bullet$ ,Style3*=$\circ$ ,Style4*=\tiny$\blacksquare$ )
 
 \usepackage{siunitx} % For Celsium sign only
 
-\usepackage[subpreambles=true]{standalone}
-
-\usepackage{tikz} % Language for producing vector graphics
-\usetikzlibrary{shapes, arrows.meta, positioning, calc, patterns}
+\usepackage[mode=buildnew]{standalone} % Load standalone with incremental
+                                       % build (shell-escape required).
+                                       % Note: pdflatex must be run with
+                                       % -shell-escape for this to work.
 
 \begin{document}
 
