@@ -1,3 +1,11 @@
+\documentclass[tikz,border=5pt]{standalone}
+
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usetikzlibrary{arrows.meta,positioning,calc}
+
+\begin{document}
+
 \begin{tikzpicture}[ auto, node distance=1.5cm, >=Latex,
     signal_label/.style={fill=white, inner sep=1.5pt, font=\small},
     block/.style={draw, fill=white, rectangle, align=center,
@@ -60,3 +68,5 @@
     pos=0.98,font=\footnotesize] {$-$} (sum1);
 
 \end{tikzpicture}
+
+\end{document}
