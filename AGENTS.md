@@ -8,7 +8,7 @@ blank line between them). This applies regardless of who runs `git commit`
 — the agent or the human committing agent-produced changes:
 
 ```
-Co-authored-by: Zed AI Agent <zed-agent@users.noreply.github.com>
+Co-authored-by: Zed AI Agent <253101093+zed-agent@users.noreply.github.com>
 AI-assisted: Zed agent (model: <model-name>, local)
 ```
 
